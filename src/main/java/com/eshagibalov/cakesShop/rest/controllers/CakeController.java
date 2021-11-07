@@ -2,6 +2,7 @@ package com.eshagibalov.cakesShop.rest.controllers;
 
 import com.eshagibalov.cakesShop.goods.CakeServiceImpl;
 import com.eshagibalov.cakesShop.rest.dto.Cake;
+import com.eshagibalov.cakesShop.rest.dto.CakeMoreInfo;
 import com.eshagibalov.cakesShop.rest.dto.Cakes;
 import com.eshagibalov.cakesShop.exceptions.CakeNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,14 +64,11 @@ public class CakeController {
     }
 
     @GetMapping(value = "get-cake-by-id/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Cake cake(@PathVariable Long id) {
-        return cakeList.getCakeList().stream()
-                .filter(c -> c.getId().equals(id))
-                .findFirst()
-                .orElseThrow(() -> new CakeNotFoundException("Cake not found"));
+    public CakeMoreInfo cake(@PathVariable Long id) {
+        return cakeService.getMoreInfo(id);
     }
 
-    @PostMapping(path = "add_cake", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = "add-cake", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Cake> addCake(@RequestBody @Valid Cake cake) {
         cake.setId(count);
         count++;
