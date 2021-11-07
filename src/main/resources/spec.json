@@ -1,0 +1,163 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "OpenAPI definition",
+    "version": "v0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080",
+      "description": "Generated server url"
+    }
+  ],
+  "paths": {
+    "/add_cake": {
+      "post": {
+        "tags": [
+          "cake-controller"
+        ],
+        "operationId": "addCake",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Cake"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "404": {
+            "description": "Not Found"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cake"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/get-cakes": {
+      "get": {
+        "tags": [
+          "cake-controller"
+        ],
+        "operationId": "cakes",
+        "responses": {
+          "404": {
+            "description": "Not Found"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cakes"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/get-cake-by-id/{id}": {
+      "get": {
+        "tags": [
+          "cake-controller"
+        ],
+        "operationId": "cake",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Not Found"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cake"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Cake": {
+        "required": [
+          "calories",
+          "id",
+          "image",
+          "name",
+          "price",
+          "weight"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "id of the cake",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the cake"
+          },
+          "calories": {
+            "type": "number",
+            "description": "Calories in cake"
+          },
+          "image": {
+            "type": "string",
+            "description": "Url of cake's image"
+          },
+          "price": {
+            "type": "number",
+            "description": "Price of the cake"
+          },
+          "weight": {
+            "type": "number",
+            "description": "Weight of the cake"
+          }
+        },
+        "description": "Cake's short data"
+      },
+      "Cakes": {
+        "required": [
+          "cake_list"
+        ],
+        "type": "object",
+        "properties": {
+          "cake_list": {
+            "type": "array",
+            "description": "Name of the cake",
+            "items": {
+              "$ref": "#/components/schemas/Cake"
+            }
+          }
+        }
+      }
+    }
+  }
+}

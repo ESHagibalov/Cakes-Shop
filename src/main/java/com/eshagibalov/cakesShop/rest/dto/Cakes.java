@@ -1,4 +1,4 @@
-package com.eshagibalov.cakesShop.dto;
+package com.eshagibalov.cakesShop.rest.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
