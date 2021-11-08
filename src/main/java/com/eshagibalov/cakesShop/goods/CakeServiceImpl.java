@@ -1,6 +1,8 @@
 package com.eshagibalov.cakesShop.goods;
 
+import com.eshagibalov.cakesShop.exceptions.CakeNotFoundException;
 import com.eshagibalov.cakesShop.rest.dto.Cake;
+import com.eshagibalov.cakesShop.rest.dto.CakeMoreInfo;
 import com.eshagibalov.cakesShop.rest.dto.Cakes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,5 +37,22 @@ public class CakeServiceImpl implements CakesService {
         cakes.setCakeList(cakesList);
 
         return cakes;
+    }
+
+    @Override
+    public CakeMoreInfo getMoreInfo(Long id) {
+        return cakeRepository.findById(id)
+                .map(cakeEntity -> {
+                    CakeMoreInfo cakeMoreInfo = new CakeMoreInfo();
+                    cakeMoreInfo.setId(cakeEntity.getId());
+                    cakeMoreInfo.setName(cakeEntity.getName());
+                    cakeMoreInfo.setCalories(cakeEntity.getCalories());
+                    cakeMoreInfo.setWeight(cakeEntity.getWeight());
+                    cakeMoreInfo.setPrice(cakeEntity.getPrice());
+                    cakeMoreInfo.setImage(cakeEntity.getImage());
+                    cakeMoreInfo.setComposition(cakeEntity.getComposition());
+                    cakeMoreInfo.setShelfLife(cakeEntity.getShelfLife());
+                    return cakeMoreInfo;
+                }).orElseThrow(()-> new CakeNotFoundException("Wrong cake id"));
     }
 }
