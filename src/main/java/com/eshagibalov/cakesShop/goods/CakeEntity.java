@@ -15,6 +15,7 @@ import java.util.Objects;
 @Table(name = "CAKES")
 public class CakeEntity {
 
+
     @Setter(AccessLevel.NONE)
     private @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,6 +44,7 @@ public class CakeEntity {
     @Column(name = "shelf_life")
     private String shelfLife;
 
+=
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

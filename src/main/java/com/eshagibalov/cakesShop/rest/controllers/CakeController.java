@@ -1,6 +1,7 @@
 package com.eshagibalov.cakesShop.rest.controllers;
 
 import com.eshagibalov.cakesShop.goods.CakeService;
+
 import com.eshagibalov.cakesShop.goods.CakeServiceImpl;
 import com.eshagibalov.cakesShop.rest.dto.Cake;
 import com.eshagibalov.cakesShop.rest.dto.CakeMoreInfo;
@@ -27,6 +28,8 @@ public class CakeController {
 
     @Autowired
     public CakeController(CakeService cakeService) {
+
+
         List<Cake> tmp = new ArrayList<Cake>();
         cakeList.setCakeList(tmp);
 

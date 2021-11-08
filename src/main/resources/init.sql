@@ -51,3 +51,4 @@ ALTER TABLE purchases
 
 ALTER TABLE purchases
     ADD CONSTRAINT FK_PURCHASES_ON_ORDER FOREIGN KEY (order_id) REFERENCES orders (id);
+);
