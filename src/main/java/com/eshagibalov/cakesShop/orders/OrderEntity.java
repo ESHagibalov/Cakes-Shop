@@ -1,10 +1,12 @@
-package com.eshagibalov.cakesShop.goods;
+package com.eshagibalov.cakesShop.orders;
 
+import com.eshagibalov.cakesShop.users.UserEntity;
 import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -12,44 +14,49 @@ import java.util.Objects;
 @Setter
 @ToString
 @RequiredArgsConstructor
-@Table(name = "CAKES")
-public class CakeEntity {
-
+@Table(name = "ORDERS")
+public class OrderEntity {
 
     @Setter(AccessLevel.NONE)
     private @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @Setter(AccessLevel.PROTECTED)
-    @Column(name = "name")
-    private String name;
 
     @Setter(AccessLevel.PROTECTED)
-    private BigDecimal calories;
+    @ToString.Exclude
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user", nullable = false)
+    private UserEntity user;
 
     @Setter(AccessLevel.PROTECTED)
-    private String image;
+    @ToString.Exclude
+    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
+    private List<PurchaseEntity> purchases;
 
     @Setter(AccessLevel.PROTECTED)
-    private BigDecimal price;
+    private String address;
 
     @Setter(AccessLevel.PROTECTED)
-    private BigDecimal weight;
+    @Column(name = "order_status")
+    private OrderStatus orderStatus;
 
     @Setter(AccessLevel.PROTECTED)
-    private String composition;
+    @Column(name = "payment_method")
+    private PaymentMethod paymentMethod;
 
     @Setter(AccessLevel.PROTECTED)
-    @Column(name = "shelf_life")
-    private String shelfLife;
+    @Column(name = "delivery_method")
+    private DeliveryMethod deliveryMethod;
 
-=
+    @Setter(AccessLevel.PROTECTED)
+    private LocalDateTime date;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        CakeEntity that = (CakeEntity) o;
+        OrderEntity that = (OrderEntity) o;
         return id != null && Objects.equals(id, that.id);
     }
 
