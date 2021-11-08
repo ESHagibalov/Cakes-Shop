@@ -44,7 +44,6 @@ public class CakeEntity {
     @Column(name = "shelf_life")
     private String shelfLife;
 
-=
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
