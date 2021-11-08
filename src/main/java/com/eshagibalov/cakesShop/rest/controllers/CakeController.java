@@ -1,5 +1,6 @@
 package com.eshagibalov.cakesShop.rest.controllers;
 
+import com.eshagibalov.cakesShop.goods.CakeService;
 import com.eshagibalov.cakesShop.goods.CakeServiceImpl;
 import com.eshagibalov.cakesShop.rest.dto.Cake;
 import com.eshagibalov.cakesShop.rest.dto.CakeMoreInfo;
@@ -22,10 +23,10 @@ import java.util.List;
 public class CakeController {
     private final Cakes cakeList = new Cakes();
     private Long count = 1L;
-    private final CakeServiceImpl cakeService;
+    private final CakeService cakeService;
 
     @Autowired
-    public CakeController(CakeServiceImpl cakeService) {
+    public CakeController(CakeService cakeService) {
         List<Cake> tmp = new ArrayList<Cake>();
         cakeList.setCakeList(tmp);
 
@@ -64,7 +65,7 @@ public class CakeController {
     }
 
     @GetMapping(value = "get-cake-by-id/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public CakeMoreInfo cake(@PathVariable Long id) {
+    public CakeMoreInfo getCakeById(@PathVariable Long id) {
         return cakeService.getMoreInfo(id);
     }
 
