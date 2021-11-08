@@ -9,39 +9,30 @@ import java.util.Objects;
 
 @Entity
 @Getter
-@Setter
+@Setter(AccessLevel.PROTECTED)
 @ToString
 @RequiredArgsConstructor
-@Table(name = "CAKES")
+@Table(name = "CAKE")
 public class CakeEntity {
 
-
     @Setter(AccessLevel.NONE)
-    private @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
 
-    @Setter(AccessLevel.PROTECTED)
     @Column(name = "name")
     private String name;
 
-    @Setter(AccessLevel.PROTECTED)
     private BigDecimal calories;
 
-    @Setter(AccessLevel.PROTECTED)
     private String image;
 
-    @Setter(AccessLevel.PROTECTED)
     private BigDecimal price;
 
-    @Setter(AccessLevel.PROTECTED)
     private BigDecimal weight;
 
-    @Setter(AccessLevel.PROTECTED)
-    private String composition;
+    private String compositions;
 
-    @Setter(AccessLevel.PROTECTED)
-    @Column(name = "shelf_life")
+    private String storageConditions;
+
     private String shelfLife;
 
     @Override

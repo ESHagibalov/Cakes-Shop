@@ -14,43 +14,39 @@ import java.util.Objects;
 @Setter
 @ToString
 @RequiredArgsConstructor
-@Table(name = "ORDERS")
+@Table(name = "ORDER")
 public class OrderEntity {
-
     @Setter(AccessLevel.NONE)
     private @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
 
     @Setter(AccessLevel.PROTECTED)
     @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user", nullable = false)
+    @JoinColumn(nullable = false)
     private UserEntity user;
 
     @Setter(AccessLevel.PROTECTED)
     @ToString.Exclude
-    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "order",fetch = FetchType.LAZY,orphanRemoval = true,cascade = CascadeType.ALL)
     private List<PurchaseEntity> purchases;
 
     @Setter(AccessLevel.PROTECTED)
-    private String address;
+    private DeliveryMethod delivery;
 
     @Setter(AccessLevel.PROTECTED)
-    @Column(name = "order_status")
-    private OrderStatus orderStatus;
+    private OrderStatus status;
 
     @Setter(AccessLevel.PROTECTED)
-    @Column(name = "payment_method")
-    private PaymentMethod paymentMethod;
+    private PaymentMethod payment;
+
 
     @Setter(AccessLevel.PROTECTED)
-    @Column(name = "delivery_method")
-    private DeliveryMethod deliveryMethod;
+    private String deliveryAddress;
 
     @Setter(AccessLevel.PROTECTED)
-    private LocalDateTime date;
+    private LocalDateTime deliveryTime;
+
 
     @Override
     public boolean equals(Object o) {

@@ -6,6 +6,7 @@ import org.hibernate.Hibernate;
 import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -15,18 +16,16 @@ import java.util.Objects;
 @Setter
 @ToString
 @RequiredArgsConstructor
-@Table(name = "USERS")
+@Table(name = "USER")
 public class UserEntity {
-
     @Setter(AccessLevel.NONE)
     private @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
 
     @Setter(AccessLevel.PROTECTED)
-    @Column(name = "phone", nullable = false, unique = true)
+    @Column(name = "number",nullable = false,unique = true)
     @NaturalId(mutable = true)
-    private String phone;
+    private String number;
 
     @Setter(AccessLevel.PROTECTED)
     @Column(name = "name")
@@ -34,8 +33,7 @@ public class UserEntity {
 
     @Setter(AccessLevel.NONE)
     @ToString.Exclude
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
-    @JoinColumn(name = "order", nullable = false)
+    @OneToMany(mappedBy = "user" ,fetch = FetchType.LAZY,orphanRemoval = false)
     private List<OrderEntity> orders = new ArrayList<>();
 
     @Override

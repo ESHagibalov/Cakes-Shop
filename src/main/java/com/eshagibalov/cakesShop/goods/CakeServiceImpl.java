@@ -50,7 +50,7 @@ public class CakeServiceImpl implements CakeService {
                     cakeMoreInfo.setWeight(cakeEntity.getWeight());
                     cakeMoreInfo.setPrice(cakeEntity.getPrice());
                     cakeMoreInfo.setImage(cakeEntity.getImage());
-                    cakeMoreInfo.setComposition(cakeEntity.getComposition());
+                    cakeMoreInfo.setComposition(cakeEntity.getCompositions());
                     cakeMoreInfo.setShelfLife(cakeEntity.getShelfLife());
                     return cakeMoreInfo;
                 }).orElseThrow(()-> new CakeNotFoundException("Wrong cake id"));

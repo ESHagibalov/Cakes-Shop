@@ -1,6 +1,7 @@
 package com.eshagibalov.cakesShop.orders;
 
 import com.eshagibalov.cakesShop.goods.CakeEntity;
+import com.eshagibalov.cakesShop.orders.OrderEntity;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -12,28 +13,26 @@ import java.util.Objects;
 @Setter
 @ToString
 @RequiredArgsConstructor
-@Table(name = "PURCHASES")
+@Table(name = "PURCHASE")
 public class PurchaseEntity {
-
     @Setter(AccessLevel.NONE)
     private @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
 
-    @Setter(AccessLevel.PROTECTED)
-    @ManyToOne(fetch = FetchType.LAZY)
+    @Setter(AccessLevel.PRIVATE)
+    @ManyToOne (fetch = FetchType.LAZY)
     @ToString.Exclude
     @JoinColumn(nullable = false)
     private CakeEntity cake;
 
-    @Setter(AccessLevel.PROTECTED)
-    @ManyToOne(fetch = FetchType.LAZY)
+    @Setter(AccessLevel.PRIVATE)
+    @ManyToOne (fetch = FetchType.LAZY)
     @ToString.Exclude
     @JoinColumn(nullable = false)
     private OrderEntity order;
 
     @Setter(AccessLevel.PROTECTED)
-    private Integer count;
+    private Integer number;
 
     @Override
     public boolean equals(Object o) {
