@@ -2,6 +2,8 @@ package com.eshagibalov.cakesShop.goods;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-interface CakeRepository extends JpaRepository<CakeEntity, Long> {
-    boolean existsByName(String name);
+public interface CakeRepository extends JpaRepository<CakeEntity, Long> {
+
+    boolean existsCakeEntityByName(String name);
+
 }

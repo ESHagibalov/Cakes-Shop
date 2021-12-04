@@ -1,4 +1,4 @@
-package com.eshagibalov.cakesShop.rest.dto;
+package com.eshagibalov.cakesShop.rest.dto.cake;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -10,9 +10,9 @@ import javax.validation.constraints.Null;
 import java.math.BigDecimal;
 
 @Data
-@Schema(description = "Cake's short data")
+@Schema(description = "Full info about cake")
 @Validated
-public class Cake {
+public class CakeMoreInfo {
     @Null
     @Schema(description = "id of the cake", required = false)
     @JsonProperty("id")
@@ -43,4 +43,13 @@ public class Cake {
     @JsonProperty("weight")
     private BigDecimal weight;
 
+    @NotNull
+    @Schema(description = "Composition of the cake", required = true)
+    @JsonProperty("composition")
+    private String composition;
+
+    @NotNull
+    @Schema(description = "Product shelf life", required = true)
+    @JsonProperty("shelf-life")
+    private String shelfLife;
 }
