@@ -59,9 +59,9 @@ public class UserController {
     public void getOrCreateOrder(@RequestBody @Valid Order newOrder) {
         try {
             userService.addUser(newOrder.getUser());
-        } catch (UserExistException userExistException) {
-            orderService.addOrder(newOrder);
+        } catch (UserExistException ignored) {
         }
+        orderService.addOrder(newOrder);
     }
 
 }
