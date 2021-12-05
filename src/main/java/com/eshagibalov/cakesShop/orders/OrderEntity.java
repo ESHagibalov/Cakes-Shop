@@ -40,7 +40,6 @@ public class OrderEntity {
     @Setter(AccessLevel.PROTECTED)
     private PaymentMethod paymentMethod;
 
-
     @Setter(AccessLevel.PROTECTED)
     private String address;
 

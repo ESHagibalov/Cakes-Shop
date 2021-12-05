@@ -13,4 +13,6 @@ public interface OrderService {
     OrderForAdmin getOrderById(Long id);
 
     void changeStatus(Long id, OrderStatus orderStatus);
+
+    void deleteOrderById(Long id);
 }

@@ -29,9 +29,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     public void addOrder(Order order) {
-
         OrderEntity orderEntity = new OrderEntity();
-
         orderEntity.setDeliveryMethod(order.getDeliveryMethod());
         orderEntity.setAddress(order.getAddress());
         orderEntity.setTime(order.getTime());
@@ -100,21 +98,26 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderForAdmin getOrderById(Long id) {
-        return orderRepository.findById(id).map(order -> {
-            OrderForAdmin orderForAdmin = new OrderForAdmin();
-            orderForAdmin.setUsersName(order.getUser().getName());
-            orderForAdmin.setUsersNumber(order.getUser().getNumber());
-            orderForAdmin.setDeliveryMethod(order.getDeliveryMethod());
-            orderForAdmin.setAddress(order.getAddress());
-            orderForAdmin.setOrderStatus(order.getOrderStatus());
-            orderForAdmin.setPaymentMethod(order.getPaymentMethod());
-            orderForAdmin.setTime(order.getTime());
-            return orderForAdmin;
-        }).orElseThrow(() -> new OrderNotFoundException("Order not found"));
+        for(int i = 0 ; i < getOrders().size(); i++) {
+            if(Objects.equals(getOrders().get(i).getId(), id)) {
+                return  getOrders().get(i);
+            }
+        }
+        return null;
     }
 
     @Override
     public void changeStatus(Long id, OrderStatus orderStatus) {
-        orderRepository.updateStatus(id, orderStatus);
+//        orderRepository.updateStatus(id, orderStatus);
+        OrderEntity orderEntity = orderRepository.findById(id).orElseThrow(() ->
+                new OrderNotFoundException("Order doesn't exist"));
+        orderEntity.setOrderStatus(orderStatus);
+        System.out.println(orderStatus);
+        orderRepository.saveAndFlush(orderEntity);
+    }
+
+    @Override
+    public void deleteOrderById(Long id) {
+        orderRepository.deleteById(id);
     }
 }

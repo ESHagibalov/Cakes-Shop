@@ -7,14 +7,14 @@
 </head>
 <body>
 <h3>
-    <a th:href="@{/admin-panel/admin-menu}"><- Menu</a>
+    <a th:href="@{/admin-panel/admin-menu}"><-Menu</a>
 </h3>
-<form method="POST" th:action="@{/admin-panel/admin-get-order/edit/{id}(id=${order.id})}">
+<form action="#" th:action="@{/admin-panel/admin-get-order/{id}(id=${order.id})}" th:object="${status}" method="post">
     <select id="status" name="status">
-        <option th:each="status : ${T(com.eshagibalov.cakesShop.orders.OrderStatus).values()}"
-                th:value="${status}"
-                th:text="${status}"
-                th:selected="${order.orderStatus == status}">
+        <option th:each="statusType : ${T(com.eshagibalov.cakesShop.orders.OrderStatus).values()}"
+                th:value="${statusType}"
+                th:text="${statusType}"
+                th:selected="${order.orderStatus == statusType}">
         </option>
     </select>
     <input type="submit" value="Submit" />

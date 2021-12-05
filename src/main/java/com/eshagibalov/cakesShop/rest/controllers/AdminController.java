@@ -3,6 +3,7 @@ package com.eshagibalov.cakesShop.rest.controllers;
 import com.eshagibalov.cakesShop.goods.CakeService;
 import com.eshagibalov.cakesShop.orders.OrderService;
 import com.eshagibalov.cakesShop.orders.OrderStatusData;
+import com.eshagibalov.cakesShop.rest.dto.order.OrderForAdmin;
 import com.eshagibalov.cakesShop.users.UserService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -50,13 +51,21 @@ public class AdminController {
     @GetMapping("/admin-get-order/{id}")
     public ModelAndView getAdminOrderById(@PathVariable Long id) {
         ModelAndView modelAndView = new ModelAndView("order");
-        modelAndView.addObject("order", orderService.getOrderById(id));
+        OrderForAdmin orderForAdmin = orderService.getOrderById(id);
+        modelAndView.addObject("order", orderForAdmin);
+        System.out.println(orderForAdmin);
         return modelAndView;
     }
 
-    @PostMapping("/admin-get-order/edit/{id}")
+    @PostMapping("/admin-get-order/{id}")
     public RedirectView editOrder(@PathVariable Long id, OrderStatusData orderStatusData) {
-        orderService.changeStatus(id, orderStatusData.getOrderStatus());
+        orderService.changeStatus(id, orderStatusData.getStatus());
         return new RedirectView(String.format("/admin-panel/admin-get-order/%d", id));
+    }
+
+    @GetMapping("/admin-get-order/delete/{id}")
+    public RedirectView deleteOrder(@PathVariable Long id) {
+        orderService.deleteOrderById(id);
+        return new RedirectView("/admin-panel/admin-orders");
     }
 }
