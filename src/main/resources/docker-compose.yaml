@@ -17,3 +17,13 @@ services:
     restart: always
     ports:
       - "9000:9001"
+
+  keycloak:
+    image: richardjkendall/keycloak-arm
+    restart: always
+    environment:
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: admin
+    ports:
+      - 9090:8080
+

@@ -48,11 +48,11 @@ public class UserController {
         return cakeService.getMoreInfo(id);
     }
 
-    @PostMapping(path = "add-cake", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Cake> createCake(@RequestBody @Valid CakeMoreInfo cakeMoreInfo) {
-        cakeService.addCake(cakeMoreInfo);
-        return new ResponseEntity<>(HttpStatus.CREATED);
-    }
+//    @PostMapping(path = "add-cake", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+//    public ResponseEntity<Cake> createCake(@RequestBody @Valid CakeMoreInfo cakeMoreInfo) {
+//        cakeService.addCake(cakeMoreInfo);
+//        return new ResponseEntity<>(HttpStatus.CREATED);
+//    }
 
     @ResponseStatus(code = HttpStatus.CREATED)
     @PostMapping(path = "add-order", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
