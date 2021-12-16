@@ -1,8 +1,6 @@
 # Use postgres/example user/password credentials
 version: '3.1'
-
 services:
-
   db:
     image: postgres
     restart: always
@@ -10,20 +8,5 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     ports:
-      - "5432:5432"
-
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - "9000:9001"
-
-  keycloak:
-    image: richardjkendall/keycloak-arm
-    restart: always
-    environment:
-      KEYCLOAK_USER: admin
-      KEYCLOAK_PASSWORD: admin
-    ports:
-      - 9090:8080
+      - "5433:5432"
 

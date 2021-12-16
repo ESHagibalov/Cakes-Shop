@@ -8,6 +8,7 @@ CREATE TABLE cakes
     weight      DECIMAL,
     composition VARCHAR(255),
     shelf_life  VARCHAR(255),
+    availability_of_cake INTEGER,
     CONSTRAINT pk_cakes PRIMARY KEY (id)
 );
 

@@ -35,6 +35,8 @@ public class CakeEntity {
 
     private String shelfLife;
 
+    private AvailabilityOfCake availabilityOfCake;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

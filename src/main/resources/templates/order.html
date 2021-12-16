@@ -7,7 +7,7 @@
 </head>
 <body>
 <h3>
-    <a th:href="@{/admin-panel/admin-menu}"><-Menu</a>
+    <a th:href="@{/admin-panel/admin-orders}"><-Orders list</a>
 </h3>
 <form action="#" th:action="@{/admin-panel/admin-get-order/{id}(id=${order.id})}" th:object="${status}" method="post">
     <select id="status" name="status">

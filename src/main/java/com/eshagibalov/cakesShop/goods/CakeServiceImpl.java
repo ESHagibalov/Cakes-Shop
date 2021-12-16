@@ -31,11 +31,11 @@ public class CakeServiceImpl implements CakeService {
             cake.setWeight(cakeEntity.getWeight());
             cake.setPrice(cakeEntity.getPrice());
             cake.setImage(cakeEntity.getImage());
+            cake.setAvailabilityOfCake(cakeEntity.getAvailabilityOfCake());
             return cake;
-        }).collect(Collectors.toList());
+        }).filter(cake -> !cake.getAvailabilityOfCake().equals(AvailabilityOfCake.UNAVAILABLE)).collect(Collectors.toList());
         Cakes cakes = new Cakes();
         cakes.setCakeList(cakesList);
-
         return cakes;
     }
 
@@ -57,7 +57,7 @@ public class CakeServiceImpl implements CakeService {
     }
 
     @Override
-    public void addCake(CakeMoreInfo cake) {
+    public Long addCake(CakeMoreInfo cake) {
         CakeEntity cakeEntity = new CakeEntity();
         cakeEntity.setCalories(cake.getCalories());
         cakeEntity.setImage(cake.getImage());
@@ -66,6 +66,32 @@ public class CakeServiceImpl implements CakeService {
         cakeEntity.setPrice(cake.getPrice());
         cakeEntity.setWeight(cake.getWeight());
         cakeEntity.setShelfLife(cake.getShelfLife());
-        cakeRepository.save(cakeEntity);
+        cakeEntity.setAvailabilityOfCake(cake.getAvailabilityOfCake());
+        cakeRepository.saveAndFlush(cakeEntity);
+        return cakeEntity.getId();
+    }
+
+    @Override
+    public void deleteCake(Long id) {
+        CakeEntity cake = cakeRepository.getById(id);
+        cake.setAvailabilityOfCake(AvailabilityOfCake.UNAVAILABLE);
+        cakeRepository.flush();
+    }
+
+    @Override
+    public CakeMoreInfo getCake(Long id) {
+        return cakeRepository.findById(id).map(cakeEntity -> {
+                    CakeMoreInfo cake = new CakeMoreInfo();
+                    cake.setId(cakeEntity.getId());
+                    cake.setCalories(cakeEntity.getCalories());
+                    cake.setName(cakeEntity.getName());
+                    cake.setImage(cakeEntity.getImage());
+                    cake.setPrice(cakeEntity.getPrice());
+                    cake.setWeight(cakeEntity.getWeight());
+                    cake.setShelfLife(cakeEntity.getStorageConditions());
+                    cake.setComposition(cakeEntity.getCompositions());
+                    return cake;
+                })
+                .orElseThrow(() -> new CakeNotFoundException("No such cake"));
     }
 }

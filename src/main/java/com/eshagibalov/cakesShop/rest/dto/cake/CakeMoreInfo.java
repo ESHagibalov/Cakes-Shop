@@ -1,5 +1,6 @@
 package com.eshagibalov.cakesShop.rest.dto.cake;
 
+import com.eshagibalov.cakesShop.goods.AvailabilityOfCake;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -52,4 +53,9 @@ public class CakeMoreInfo {
     @Schema(description = "Product shelf life", required = true)
     @JsonProperty("shelf-life")
     private String shelfLife;
+
+    @NotNull
+    @Schema(description = "Cake availability", required = true)
+    @JsonProperty("availability-of-cake")
+    private AvailabilityOfCake availabilityOfCake;
 }

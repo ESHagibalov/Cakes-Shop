@@ -1,8 +1,10 @@
 package com.eshagibalov.cakesShop.rest.controllers;
 
+import com.eshagibalov.cakesShop.goods.AvailabilityOfCake;
 import com.eshagibalov.cakesShop.goods.CakeService;
 import com.eshagibalov.cakesShop.orders.OrderService;
 import com.eshagibalov.cakesShop.orders.OrderStatusData;
+import com.eshagibalov.cakesShop.rest.dto.cake.CakeMoreInfo;
 import com.eshagibalov.cakesShop.rest.dto.order.OrderForAdmin;
 import com.eshagibalov.cakesShop.users.UserService;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +29,7 @@ public class AdminController {
         return new ModelAndView("menu");
     }
 
+    /////////////Main parts///////////////////
     @GetMapping("/admin-orders")
     public ModelAndView getAdminOrdersList() {
         ModelAndView modelAndView = new ModelAndView("orders");
@@ -48,6 +51,7 @@ public class AdminController {
         return modelAndView;
     }
 
+    //////////////Orders work///////////////////////
     @GetMapping("/admin-get-order/{id}")
     public ModelAndView getAdminOrderById(@PathVariable Long id) {
         ModelAndView modelAndView = new ModelAndView("order");
@@ -68,4 +72,33 @@ public class AdminController {
         orderService.deleteOrderById(id);
         return new RedirectView("/admin-panel/admin-orders");
     }
+
+    ////////////Cakes work/////////////////////////
+    @GetMapping("/admin-get-cake/edit")
+    public ModelAndView addingCake() {
+        ModelAndView modelAndView = new ModelAndView("add-cake");
+        modelAndView.addObject("cake", new CakeMoreInfo());
+        return modelAndView;
+    }
+
+    @GetMapping(value = "cake/{id}")
+    public ModelAndView getCakeById(@PathVariable Long id) {
+        ModelAndView modelAndView = new ModelAndView("cake");
+        modelAndView.addObject("cake",cakeService.getCake(id));
+        return modelAndView;
+    }
+
+    @GetMapping(value = "/admin-get-cake/delete/{id}")
+    public RedirectView deleteCake(@PathVariable Long id){
+        cakeService.deleteCake(id);
+        return new RedirectView("/admin-panel/admin-cakes");
+    }
+
+    @PostMapping(value = "/admin-get-cake/edit")
+    public RedirectView addCake(CakeMoreInfo cake){
+        cake.setAvailabilityOfCake(AvailabilityOfCake.AVAILABLE);
+        Long id = cakeService.addCake(cake);
+        return new RedirectView("/admin-panel/cake/"+id.toString());
+    }
+
 }

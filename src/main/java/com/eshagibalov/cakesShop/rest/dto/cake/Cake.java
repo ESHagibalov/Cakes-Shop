@@ -1,5 +1,6 @@
 package com.eshagibalov.cakesShop.rest.dto.cake;
 
+import com.eshagibalov.cakesShop.goods.AvailabilityOfCake;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -42,5 +43,10 @@ public class Cake {
     @Schema(description = "Weight of the cake", required = true)
     @JsonProperty("weight")
     private BigDecimal weight;
+
+    @NotNull
+    @Schema(description = "Cake availability", required = true)
+    @JsonProperty("availability-of-cake")
+    private AvailabilityOfCake availabilityOfCake;
 
 }

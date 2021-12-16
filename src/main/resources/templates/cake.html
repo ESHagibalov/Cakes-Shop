@@ -7,30 +7,33 @@
 </head>
 <body>
 <h3>
-    <a th:href="@{/admin-panel/admin-menu}"><- Menu</a>
+    <a th:href="@{/admin-panel/admin-cakes}"><- Cakes List</a>
 </h3>
 <table border="1" cellpadding="2" class="table table-striped">
     <thead>
     <tr>
         <th>Cake's name</th>
+        <th>Calories</th>
+        <th>Image</th>
         <th>Price</th>
+        <th>Weight</th>
 
     </tr>
     </thead>
     <tbody>
-    <tr th:each="cake : ${cakes}">
+    <tr>
         <td th:text="${cake.name}"></td>
+        <td th:text="${cake.calories}"></td>
+        <td th:text="${cake.image}"></td>
         <td th:text="${cake.price}"></td>
+        <td th:text="${cake.weight}"></td>
         <td>
-            <form action="#" method="get" th:action="@{/admin-panel/cake/{id}(id=${cake.id})}">
-                <input type="submit" value="More Info"/>
+            <form action="#" method="get" th:action="@{/admin-panel/admin-get-cake/delete/{id}(id=${cake.id})}">
+                <input type="submit" value="Delete"/>
             </form>
         </td>
     </tr>
     </tbody>
 </table>
-<form action="#" method="get" th:action="@{/admin-panel/admin-get-cake/edit}">
-    <input type="submit" value="Add"/>
-</form>
 </body>
 </html>
