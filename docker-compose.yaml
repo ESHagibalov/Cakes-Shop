@@ -13,7 +13,7 @@ services:
     image: cakeshop
     restart: always
     ports:
-      - 80:2020
+      - 81:2020
       - 8000:8000
     networks:
       - auth-network

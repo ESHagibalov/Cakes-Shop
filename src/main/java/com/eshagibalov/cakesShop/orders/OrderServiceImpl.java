@@ -68,7 +68,7 @@ public class OrderServiceImpl implements OrderService {
             order.setCakes(tmp);
 
             //далее ужасный код, за который мне будет стыдно утром (пишу это в 2 часа ночи), но BigDecimal арифметика
-            //очень конченная
+            //
             BigDecimal priceCounter = BigDecimal.ZERO;
             List<BigDecimal> prices = new LinkedList<>();
             for(Map.Entry<Long, Integer> entry : order.getCakes().entrySet()) {

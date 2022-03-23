@@ -35,7 +35,6 @@ public class UserController {
         this.cakeService = cakeService;
         this.purchaseService = purchaseService;
         this.orderService = orderService;
-
     }
 
     @GetMapping(value = "get-all-cakes", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -43,10 +42,10 @@ public class UserController {
         return cakeService.getCakes();
     }
 
-    @GetMapping(value = "cake/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public CakeMoreInfo getCakeById(@PathVariable Long id) {
-        return cakeService.getMoreInfo(id);
-    }
+//    @GetMapping(value = "cake/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+//    public CakeMoreInfo getCakeById(@PathVariable Long id) {
+//        //return cakeService.getMoreInfo(id);
+//    }
 
 //    @PostMapping(path = "add-cake", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 //    public ResponseEntity<Cake> createCake(@RequestBody @Valid CakeMoreInfo cakeMoreInfo) {
